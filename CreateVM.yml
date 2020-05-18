@@ -68,7 +68,6 @@
         vm_size: Standard_DS1_v2
         admin_username: "{{ admin_username }}"
         admin_password: "{{ admin_password }}"
-        virtual_network_resource_group: "{{ resource_group_vnet }}"
         virtual_network_name: "{{ vnet_name }}"
         subnet_name: "{{ subnet_name }}"
         public_ip_allocation_method: Disabled
