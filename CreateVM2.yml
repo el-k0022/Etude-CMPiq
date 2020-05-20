@@ -6,21 +6,13 @@
   vars:
     resource_group_vm: nabiliqresources
     vnet_name: vnetiq
-    subnet_name: subnetiq
+    subnet_name: subnet-ansibleVM
     vm_name: ansible-VM
     location: westeurope
     admin_username: ansibleuser
     admin_password: Password@123
 
   tasks:
-
-    - name: Create an Ansible Resource Group
-      azure_rm_resourcegroup:
-        name: "{{ resource_group_vm }}"
-        location: "{{ location }}"
-        tags:
-            testing: testing
-            delete: never
 
     - name: Create an Ansible Virtual Network
       azure_rm_virtualnetwork:
