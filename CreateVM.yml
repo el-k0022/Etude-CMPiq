@@ -112,6 +112,7 @@
         ansible_host_key_checking: true 
 
     - name: Install "CURL" package
+      shell: apt-get update
       become: true
       apt:
         name: curl
