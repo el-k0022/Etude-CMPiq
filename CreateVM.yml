@@ -4,23 +4,15 @@
   gather_facts: true
 
   vars:
-    resource_group_vm: ansible-RG
-    vnet_name: ansible-Vnet
-    subnet_name: ansible-subNet
+    resource_group_vm: nabilresources
+    vnet_name: nabilvnet
+    subnet_name: nabilsubnet
     vm_name: ansible-VM
     location: westeurope
     admin_username: ansibleuser
     admin_password: Password@123
 
   tasks:
-
-    - name: Create an Ansible Resource Group
-      azure_rm_resourcegroup:
-        name: "{{ resource_group_vm }}"
-        location: "{{ location }}"
-        tags:
-            testing: testing
-            delete: never
 
     - name: Create an Ansible Virtual Network
       azure_rm_virtualnetwork:
@@ -75,5 +67,5 @@
           offer: UbuntuServer
           publisher: Canonical
           sku: 16.04-LTS
-          version: latest
+          version: lates
       register: output
