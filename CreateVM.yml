@@ -65,7 +65,7 @@
             direction: Inbound
      
     - name: Create an Ansible Virtual Network interface
-      azure_rm_networkinterfaces:
+      azure_rm_networkinterface:
         resource_group: "{{ resource_group_vm }}"
         name: ansibleNIC
         virtual_network: "{{ vnet_name }}"
