@@ -35,6 +35,17 @@
         name: "{{ subnet_name }}"
         address_prefix_cidr: "10.1.0.0/24"
 
+    - name: Create public IP address
+      azure_rm_publicipaddress:
+        resource_group: nabilresources
+        allocation_method: Static
+        name: pip-ansible
+      register: output_ip_address
+
+    - name: Output public IP
+      debug:
+        msg: "The public IP is {{ output_ip_address.state.ip_address }}"
+
     - name: Create Network Security Group that allows SSH
       azure_rm_securitygroup:
         resource_group: "{{ resource_group_vm }}"
@@ -66,7 +77,6 @@
             key_data: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDHyecrKtacZ6SIu57YSMsqSmxYXfWqPhgJfoGORRFrkz9VyAdDDxhRhx4r7pJgX4DhfHDp8UoL20jxLsm8VinmRs5Ex63k3widgwP34E6o4WSnrBS2LNNNEsTGcdnfbWzUBubmtT1dqSjjN2CtGr/QYM0qlPCZnQwaQpyn3jqkapANAjggB+5B0wK5MeowixsPrZgNItNkE3FNJLLXh1XK+oVsZeXigxZWiVbxZg93qGQ0ppf/JF+/MW9bx+xscW9O9T/W8ALNbji+432ldHhEjSciKYtpX8L5OQtX9uNykTuHQQ2IPRiDWg6qPmVsFY/DxpsGvTnSfWEPvJw2qrdZ nabilelkhalii@nabilelkhalii-VirtualBox"
         virtual_network_name: "{{ vnet_name }}"
         subnet_name: "{{ subnet_name }}"
-        public_ip_allocation_method: Dynamic
         image:
           offer: UbuntuServer
           publisher: Canonical
