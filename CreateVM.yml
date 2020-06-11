@@ -14,19 +14,19 @@
 
   tasks:
 
-     - name: Create an Ansible Virtual Network
+    - name: Create an Ansible Virtual Network
       azure_rm_virtualnetwork:
         resource_group: "{{ resource_group_vm }}"
         name: "{{ vnet_name }}"
         address_prefixes_cidr:
-            - "10.1.0.0/16"
-            - "172.100.0.0/16"
+          - "10.1.0.0/16"
+          - "172.100.0.0/16"
         dns_servers:
-            - "127.0.0.1"
-            - "127.0.0.2"
+          - "127.0.0.1"
+          - "127.0.0.2"
         tags:
-            testing: testing
-            delete: on-exit
+          testing: testing
+          delete: on-exit
 
     - name: Create an Ansible Subnet Network
       azure_rm_subnet:
@@ -65,17 +65,17 @@
             direction: Inbound
      
     - name: Create an Ansible Virtual Network interface
-       azure_rm_networkinterfaces:
-         resource_group: "{{ resource_group_vm }}"
-         name: ansibleNIC
-         virtual_network: "{{ vnet_name }}"
-         subnet: "{{ subnet_name }}"
-         public_ip_name: pip-ansible
-         security_group: ansibleNSG
-         ip_configurations:
-           - name: ipconfig1
-             public_ip_address_name: publicip001
-             primary: True
+      azure_rm_networkinterfaces:
+        resource_group: "{{ resource_group_vm }}"
+        name: ansibleNIC
+        virtual_network: "{{ vnet_name }}"
+        subnet: "{{ subnet_name }}"
+        public_ip_name: pip-ansible
+        security_group: ansibleNSG
+        ip_configurations:
+          - name: ipconfig1
+            public_ip_address_name: publicip001
+            primary: True
 
     - name: Create VM
       azure_rm_virtualmachine:
@@ -105,6 +105,6 @@
       register: output
 
     - name: Install JRE
-    apt:
-      name: default-jre
-      update_cache: yes
+      apt:
+        name: default-jre
+        update_cache: yes
