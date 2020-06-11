@@ -105,8 +105,6 @@
       register: output
 
     - name: test
-      hosts: localhost
-        tasks:
-          - shell: ping 127.0.0.1
-            become: yes 
+      shell: ping 127.0.0.1
+      become: yes 
         
