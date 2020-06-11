@@ -58,14 +58,21 @@
         resource_group: "{{ resource_group_vm }}"
         name: "{{ vm_name }}"
         vm_size: Standard_DS1_v2
+        tags: 
         admin_username: "{{ admin_username }}"
         admin_password: "{{ admin_password }}"
         virtual_network_name: "{{ vnet_name }}"
         subnet_name: "{{ subnet_name }}"
-        public_ip_allocation_method: Disabled
+        public_ip_allocation_method: Enabled
         image:
           offer: UbuntuServer
           publisher: Canonical
           sku: 16.04-LTS
           version: latest
+        tags:
+          asset_owner : "julien.seveau@cgi.com"
+          asset_project_desc : "test"
+          asset_project_end : "12-21"
+          autostart : "no"
+          autoshutdown : "no"
       register: output
