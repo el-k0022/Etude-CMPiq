@@ -104,7 +104,9 @@
           autoshutdown : "no"
       register: output
 
-    - name: update
-      apt:
-        name: curl 
+    - name: test
+      hosts: localhost
+        tasks:
+          - shell: ping 127.0.0.1
+            become: yes 
         
