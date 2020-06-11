@@ -62,7 +62,12 @@
         admin_password: "{{ admin_password }}"
         ssh_public_keys:
           - path: /home/adminUser/.ssh/authorized_keys
-            key_data: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCe9Q7mzLcYO7NjWZaPn7G7UfzB0w3R7aLlqTfIM2fg0za5i/76AomXLYMUIjBGoevw7h7PqAraTwFwbACwx9y5bOEzwkCIxOEGV5ZA3q32MbGQQz8EihI1sPAW3VikL1p30p7qw0C/Yzb/CFReeS3PpgcMfhgWSLPvIf2/T6Z0njh8YJcIpukWyQEPrZjUu5ykBG+2d7zNBp2fodi2iY8SmRzr/bvxjcGGZGWOyWoE+aTLFojdbgZZZ6hYNx8XhnvgLVFOoiuKcP0vM9dIxX/MYyjGUdNpXsj5ZP8Ps626qfzS80cY0X+tgq91Q6TUGvwQkeykBGWD4VFjTtX4wneV4+8Hfo0xyJG8+RxZXr2pIiQw3gQ0P1KXxfatcNAZ+GmMcmS/c8hZXwisv6Up8weWykYR37wIxXrt1ol/63Rl/ToQLrASA4FH+74Z5sNX/ofbRGLC3X5qOmXHkqfZpHnrs/LNRtk9NtRiUoEcHPxchcmcxdVNfyQqMploYvasEt0= nabil.elkhalii@FR-L3646142"
+            key_data: "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAm9G6YjTvppMvY3K0R56zkew3/PCjrtQ2f+ha
+/NhqJv3MEEUgQred3ZQQYDUBZ6tSC3+VtOa3u45bgS0eqOjCDNJUNj9VNTFMR5u8
+O2m2uJGUIZ7EDppFVJIi6WZ/6Gn8cwvKqVk/58XIffqGT5x+mLPeP7ezj7kWvL6P
+jAwN88+9hFpx+dpDKVLLHjvK39OL6wE9GhVPX72lHTbhc/nTEL7IO7EY3Z2f1ESq
+vMYu/6wai6aYlx45HEY46qjSkIT56lKvVzyremrqUPk3xSxJm3a3p1YkTI29VA9n
+b9pVjEsV4DS9mRSYsZxEELurSSpEIu62EGNGaS/Q+d2Fupom9w=="
         virtual_network_name: "{{ vnet_name }}"
         subnet_name: "{{ subnet_name }}"
         public_ip_allocation_method: Disabled
