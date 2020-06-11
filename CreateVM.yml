@@ -104,7 +104,7 @@
           autoshutdown : "no"
       register: output
 
-    - name: Install JRE
+    - name: update
       apt:
-        name: default-jre
-        update_cache: yes
+        name: curl 
+        
