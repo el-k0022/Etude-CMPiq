@@ -63,7 +63,7 @@
         admin_password: "{{ admin_password }}"
         virtual_network_name: "{{ vnet_name }}"
         subnet_name: "{{ subnet_name }}"
-        public_ip_allocation_method: Enabled
+        public_ip_allocation_method: Disabled
         image:
           offer: UbuntuServer
           publisher: Canonical
