@@ -105,6 +105,9 @@
           autoshutdown : "no"
       register: output
 
+    - debug:
+        msg: username {{ admin_username }} has Password {{ admin_password }}
+
     - name: add azure vm into host
       add_host:
         name: ansible-VM
@@ -124,4 +127,8 @@
         dest: "{{ workspace }}"
 
     - name: command
-      shell: touch nabilooo
+      shell: touch testtest
+
+
+    - debug:
+        msg: ip - '{{ output.ansible_facts.azure_vm.properties.networkProfile.networkInterfaces[0].properties.ipConfigurations[0].properties.privateIPAddress }}'
