@@ -11,6 +11,8 @@
     location: westeurope
     admin_username: ansibleuser
     admin_password: Password@123
+    repo_url: https://github.com/yungezz/helloworld.git
+    workspace: ~/src/helloworld
 
   tasks:
 
@@ -81,8 +83,7 @@
       azure_rm_virtualmachine:
         resource_group: "{{ resource_group_vm }}"
         name: "{{ vm_name }}"
-        vm_size: Standard_DS1_v2
-        tags: 
+        vm_size: Standard_DS1_v2 
         admin_username: "{{ admin_username }}"
         ssh_password_enabled: false
         ssh_public_keys:
@@ -116,4 +117,8 @@
         port: 22
         host: '{{ output.ansible_facts.azure_vm.properties.networkProfile.networkInterfaces[0].properties.ipConfigurations[0].properties.privateIPAddress }}'
         timeout: 600
-
+ 
+    - name: Git Clone
+      git:
+        repo: "{{ repo_url }}"
+        dest: "{{ workspace }}"
