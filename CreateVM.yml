@@ -84,7 +84,7 @@
         vm_size: Standard_DS1_v2
         tags: 
         admin_username: "{{ admin_username }}"
-        admin_password: "{{ admin_password }}"
+        ssh_password_enabled: false
         ssh_public_keys:
           - path: /home/ansibleuser/.ssh/authorized_keys
             key_data: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDHyecrKtacZ6SIu57YSMsqSmxYXfWqPhgJfoGORRFrkz9VyAdDDxhRhx4r7pJgX4DhfHDp8UoL20jxLsm8VinmRs5Ex63k3widgwP34E6o4WSnrBS2LNNNEsTGcdnfbWzUBubmtT1dqSjjN2CtGr/QYM0qlPCZnQwaQpyn3jqkapANAjggB+5B0wK5MeowixsPrZgNItNkE3FNJLLXh1XK+oVsZeXigxZWiVbxZg93qGQ0ppf/JF+/MW9bx+xscW9O9T/W8ALNbji+432ldHhEjSciKYtpX8L5OQtX9uNykTuHQQ2IPRiDWg6qPmVsFY/DxpsGvTnSfWEPvJw2qrdZ nabilelkhalii@nabilelkhalii-VirtualBox"
@@ -111,9 +111,3 @@
         ansible_user: "{{ admin_username }}"
         ansible_host_key_checking: true 
 
-    - name: Install "CURL" package
-      shell: apt-get update
-      become: true
-      apt:
-        name: curl
-        
