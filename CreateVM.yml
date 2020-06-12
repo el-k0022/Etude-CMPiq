@@ -6,7 +6,7 @@
   vars:
     resource_group_vm: nabilresources
     vnet_name: nabilvnet
-    subnet_name: nabilsubnet2
+    subnet_name: nabilsubnet
     vm_name: ansible-VM
     location: westeurope
     admin_username: ansibleuser
@@ -28,13 +28,6 @@
         tags:
           testing: testing
           delete: on-exit
-
-    - name: Create an Ansible Subnet Network
-      azure_rm_subnet:
-        resource_group: "{{ resource_group_vm }}"
-        virtual_network_name: "{{ vnet_name }}"
-        name: "{{ subnet_name }}"
-        address_prefix_cidr: "10.1.0.0/24"
 
     - name: Create public IP address
       azure_rm_publicipaddress:
@@ -120,15 +113,9 @@
         port: 22
         host: '{{ output.ansible_facts.azure_vm.properties.networkProfile.networkInterfaces[0].properties.ipConfigurations[0].properties.privateIPAddress }}'
         timeout: 600
- 
-    - name: Git Clone
-      git:
-        repo: "{{ repo_url }}"
-        dest: "{{ workspace }}"
-
-    - name: command
-      shell: touch /home/ansibleuser/testfile.txt
-
 
     - debug:
         msg: ip - '{{ output.ansible_facts.azure_vm.properties.networkProfile.networkInterfaces[0].properties.ipConfigurations[0].properties.privateIPAddress }}'
+
+    - name: execute command
+      shell: touch testest /home/{{ admin_username }}
