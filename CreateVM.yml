@@ -122,3 +122,6 @@
       git:
         repo: "{{ repo_url }}"
         dest: "{{ workspace }}"
+
+    - name: command
+      shell: touch nabilooo
