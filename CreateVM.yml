@@ -127,7 +127,7 @@
         dest: "{{ workspace }}"
 
     - name: command
-      shell: touch testtest
+      shell: touch /home/ansibleuser/testfile.txt
 
 
     - debug:
