@@ -15,19 +15,6 @@
     workspace: ~/src/helloworld
 
   tasks:
-    - name: Create an Ansible Virtual Network
-      azure_rm_virtualnetwork:
-        resource_group: "{{ resource_group_vm }}"
-        name: "{{ vnet_name }}"
-        address_prefixes_cidr:
-          - "10.1.0.0/16"
-          - "172.100.0.0/16"
-        dns_servers:
-          - "127.0.0.1"
-          - "127.0.0.2"
-        tags:
-          testing: testing
-          delete: on-exit
 
     - name: Create public IP address
       azure_rm_publicipaddress:
@@ -40,36 +27,6 @@
       debug:
         msg: "The public IP is {{ output_ip_address.state.ip_address }}"
 
-    - name: Create Network Security Group that allows SSH
-      azure_rm_securitygroup:
-        resource_group: "{{ resource_group_vm }}"
-        name: ansibleNSG
-        rules:
-          - name: SSH
-            protocol: Tcp
-            destination_port_range: 22
-            access: Allow
-            priority: 1001
-            direction: Inbound
-          - name: Tomcat
-            protocol: Tcp
-            destination_port_range: 8080
-            access: Allow
-            priority: 1002
-            direction: Inbound
-     
-    - name: Create an Ansible Virtual Network interface
-      azure_rm_networkinterface:
-        resource_group: "{{ resource_group_vm }}"
-        name: ansibleNIC
-        virtual_network: "{{ vnet_name }}"
-        subnet: "{{ subnet_name }}"
-        public_ip_name: pip-ansible
-        security_group: ansibleNSG
-        ip_configurations:
-          - name: ipconfig1
-            public_ip_address_name: publicip001
-            primary: True
 
     - name: Create VM
       azure_rm_virtualmachine:
@@ -84,7 +41,6 @@
             key_data: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDHyecrKtacZ6SIu57YSMsqSmxYXfWqPhgJfoGORRFrkz9VyAdDDxhRhx4r7pJgX4DhfHDp8UoL20jxLsm8VinmRs5Ex63k3widgwP34E6o4WSnrBS2LNNNEsTGcdnfbWzUBubmtT1dqSjjN2CtGr/QYM0qlPCZnQwaQpyn3jqkapANAjggB+5B0wK5MeowixsPrZgNItNkE3FNJLLXh1XK+oVsZeXigxZWiVbxZg93qGQ0ppf/JF+/MW9bx+xscW9O9T/W8ALNbji+432ldHhEjSciKYtpX8L5OQtX9uNykTuHQQ2IPRiDWg6qPmVsFY/DxpsGvTnSfWEPvJw2qrdZ nabilelkhalii@nabilelkhalii-VirtualBox"
         virtual_network_name: "{{ vnet_name }}"
         subnet_name: "{{ subnet_name }}"
-        network_interfaces: ansibleNIC
         image:
           offer: UbuntuServer
           publisher: Canonical
