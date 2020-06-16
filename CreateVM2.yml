@@ -1,6 +1,6 @@
 ---
 - hosts: localhost
-  connection: local
+  connection: https://github.com/ansible/ansibleslocal
   gather_facts: true
 
   vars:
