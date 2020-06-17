@@ -10,7 +10,7 @@
     vm_name: ansible-VM
     location: westeurope
     admin_username: ansibleuser
-    admin_password: Password@123
+    admin_password: nabiiiilo 
 
   tasks:
 
