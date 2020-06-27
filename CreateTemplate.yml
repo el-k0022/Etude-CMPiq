@@ -1,0 +1,79 @@
+---
+- hosts: localhost
+  connection: https://github.com/ansible/ansibleslocal
+  gather_facts: true
+
+  vars:
+    resource_group_vm: nabilresources
+    vnet_name: nabilvnet
+    subnet_name: nabilsubnet
+    vm_name: ansible-VM
+    location: westeurope
+    admin_username: ansibleuser
+    admin_password: nabiiiilo 
+
+  tasks:
+
+    - name: Create an Ansible Virtual Network
+      azure_rm_virtualnetwork:
+        resource_group: "{{ resource_group_vm }}"
+        name: "{{ vnet_name }}"
+        address_prefixes_cidr:
+            - "10.1.0.0/16"
+            - "172.100.0.0/16"
+        dns_servers:
+            - "127.0.0.1"
+            - "127.0.0.2"
+        tags:
+            testing: testing
+            delete: on-exit
+
+    - name: Create an Ansible Subnet Network
+      azure_rm_subnet:
+        resource_group: "{{ resource_group_vm }}"
+        virtual_network_name: "{{ vnet_name }}"
+        name: "{{ subnet_name }}"
+        address_prefix_cidr: "10.1.0.0/24"
+
+    - name: Create Network Security Group that allows SSH
+      azure_rm_securitygroup:
+        resource_group: "{{ resource_group_vm }}"
+        name: "{{ vm_name }}"
+        rules:
+          - name: SSH
+            protocol: Tcp
+            destination_port_range: 22
+            access: Allow
+            priority: 1001
+            direction: Inbound
+          - name: Tomcat
+            protocol: Tcp
+            destination_port_range: 8080
+            access: Allow
+            priority: 1002
+            direction: Inbound
+
+    - name: Create VM
+      azure_rm_virtualmachine:
+        resource_group: "{{ resource_group_vm }}"
+        name: "{{ vm_name }}"
+        vm_size: Standard_DS1_v2
+        admin_username: "{{ admin_username }}"
+        admin_password: "{{ admin_password }}"
+        ssh_public_keys:
+          - path: /home/adminUser/.ssh/authorized_keys
+            key_data: "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAm9G6YjTvppMvY3K0R56zkew3/PCjrtQ2f+ha
+/NhqJv3MEEUgQred3ZQQYDUBZ6tSC3+VtOa3u45bgS0eqOjCDNJUNj9VNTFMR5u8
+O2m2uJGUIZ7EDppFVJIi6WZ/6Gn8cwvKqVk/58XIffqGT5x+mLPeP7ezj7kWvL6P
+jAwN88+9hFpx+dpDKVLLHjvK39OL6wE9GhVPX72lHTbhc/nTEL7IO7EY3Z2f1ESq
+vMYu/6wai6aYlx45HEY46qjSkIT56lKvVzyremrqUPk3xSxJm3a3p1YkTI29VA9n
+b9pVjEsV4DS9mRSYsZxEELurSSpEIu62EGNGaS/Q+d2Fupom9w=="
+        virtual_network_name: "{{ vnet_name }}"
+        subnet_name: "{{ subnet_name }}"
+        public_ip_allocation_method: Disabled
+        image:
+          offer: UbuntuServer
+          publisher: Canonical
+          sku: 16.04-LTS
+          version: lates
+      register: output
